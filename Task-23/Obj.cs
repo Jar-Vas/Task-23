@@ -16,7 +16,8 @@ namespace Task_23
     }
     internal class Marine : Obj
     {
-        public static Texture Tex { get; set; } = new Texture(new List<RectSet> { new RectSet(new Rectangle(-5, -5, 5, 5), Color.Red) });
+        public static Texture Tex { get; set; } = new Texture(new List<RectSet> { new RectSet(new Rectangle(-5, -5, 10, 10), Color.Red)
+        , new RectSet(new Rectangle(-5, -5, 20, 3), Color.Magenta)});
         public Marine(Vector2 coord)
         {
             Coord = coord;
@@ -24,7 +25,10 @@ namespace Task_23
             //Obj.Objs.Add(this);
             Obj.ObjCount++;
         }
-
+        public void Rotate(float angle)
+        {
+            Tex.Rotate(angle);
+        }
         public override void Draw() { Tex.Draw(Coord); }
     }
 }

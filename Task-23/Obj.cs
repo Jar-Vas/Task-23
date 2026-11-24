@@ -14,6 +14,11 @@ namespace Task_23
         public static List<Obj> Objs { get; set; }
         public abstract void Draw();
     }
+    abstract internal class Unit : Obj
+    {
+        public double Speed;
+
+    }
     internal class Marine : Obj
     {
         public static Texture Tex { get; set; } = new Texture(new List<RectSet> { new RectSet(new Rectangle(-5, -5, 10, 10), Color.Red)

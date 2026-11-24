@@ -36,9 +36,13 @@ namespace Task_23
                         Raylib.DrawRectangleLines(j * cellSize, i * cellSize, cellSize, cellSize, Color.DarkBlue);
                     }
                 }
+                Texture t = new Texture(new List<RectSet> { new RectSet(new Rectangle(-20, -30, 20, 30), Color.Red) });
+                //t.Draw(new System.Numerics.Vector2(100, 100), 1);
                 //Raylib.DrawText("Hello Raylib!", 300, 100, 40, Color.White);
                 //Raylib.DrawCircle(500, 400, 100, Color.Red);
                 //Raylib.DrawRectangle(100, 200, 200, 100, Color.Blue);
+                Marine m = new Marine(new System.Numerics.Vector2(100, 100));
+                m.Draw();
 
                 Raylib.EndDrawing();
             }

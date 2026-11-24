@@ -8,8 +8,8 @@ namespace Task_23
         static void Main(string[] args)
         {
             Console.WriteLine("Hello, World!");
-            int Height = 80;
-            int Width = 130;
+            int Height = 30;
+            int Width = 30;
             int cellSize = 10;
             Area area = new Area(Height, Width);
 
@@ -47,7 +47,7 @@ namespace Task_23
                 Raylib.EndDrawing();
             }
 
-            Raylib.CloseWindow();
+            //Raylib.CloseWindow();
         }
     }
 }

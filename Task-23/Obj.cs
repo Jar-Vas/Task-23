@@ -17,7 +17,7 @@ namespace Task_23
     abstract internal class Unit : Obj
     {
         public double Speed;
-
+        public double UnitSize;
     }
     internal class Marine : Obj
     {
@@ -27,6 +27,7 @@ namespace Task_23
         {
             Coord = coord;
             Id = Obj.ObjCount;
+            //Settings.area.Arr[((int)(coord.Y % Settings.cellSize)), ((int)(coord.X % Settings.cellSize))].Objs.Add(this);
             //Obj.Objs.Add(this);
             Obj.ObjCount++;
         }

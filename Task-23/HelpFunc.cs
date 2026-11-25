@@ -18,11 +18,11 @@ namespace Task_23
             (start, end) = Formating(start, end);
             return (
                 new Vector2Int(
-                    (int)((start.X + Settings.cellSize / 2) % Settings.cellSize) - 1, 
-                    (int)((start.Y + Settings.cellSize / 2) % Settings.cellSize) - 1),
+                    (int)((start.X + Settings.cellSize / 2) / Settings.cellSize) - 1, 
+                    (int)((start.Y + Settings.cellSize / 2) / Settings.cellSize) - 1),
                 new Vector2Int(
-                    (int)((start.X + 3 * Settings.cellSize / 2) % Settings.cellSize), 
-                    (int)((start.Y + 3 * Settings.cellSize / 2) % Settings.cellSize))
+                    (int)((end.X + 3 * Settings.cellSize / 2) / Settings.cellSize), 
+                    (int)((end.Y + 3 * Settings.cellSize / 2) / Settings.cellSize))
                 );
         }
     }

@@ -19,12 +19,13 @@ namespace Task_23
             Vector2 pMouse = new Vector2(0, 0);
             List<Unit> selected = new List<Unit>();
             Marine m = new Marine(new System.Numerics.Vector2(100, 100));
+            Marine m1 = new Marine(new System.Numerics.Vector2(100, 150));
+            Marine m2 = new Marine(new System.Numerics.Vector2(100, 200));
 
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
 
-                Raylib.ClearBackground(Color.Black);
 
                 #region area
                 for (int i = 0; i < Settings.Height; i++)
@@ -42,26 +43,21 @@ namespace Task_23
                     }
                 }
                 #endregion area
-                Texture t = new Texture(new List<RectSet> { new RectSet(new Rectangle(-20, -30, 20, 30), Color.Red) });
-                //t.Draw(new System.Numerics.Vector2(100, 100), 1);
-                //Raylib.DrawText("Hello Raylib!", 300, 100, 40, Color.White);
-                //Raylib.DrawCircle(500, 400, 100, Color.Red);
-                //Raylib.DrawRectangle(100, 200, 200, 100, Color.Blue);
-                m.Draw();
-                m.Rotate(1);
 
                 if (Raylib.IsMouseButtonDown(MouseButton.Left))
                 {
                     if (fMouse)
                     {
+                        Vector2 start, end;
+                        (start, end) = HelpFunc.Formating(pMouse, Raylib.GetMousePosition());
                         Raylib.DrawRectangle(
-                            ((int)pMouse.X), ((int)pMouse.Y), ((int)(Raylib.GetMouseX() - pMouse.X)),
-                            ((int)(Raylib.GetMouseY() - pMouse.Y)), new Color(0, 128, 0, 80)
+                            ((int)start.X), ((int)start.Y), ((int)(end.X - start.X)),
+                            ((int)(end.Y - start.Y)), new Color(0, 128, 0, 80)
                             );
 
                         Raylib.DrawRectangleLines(
-                            ((int)pMouse.X), ((int)pMouse.Y), ((int)(Raylib.GetMouseX() - pMouse.X)),
-                            ((int)(Raylib.GetMouseY() - pMouse.Y)), new Color(0, 128, 0, 100)
+                            ((int)start.X), ((int)start.Y), ((int)(end.X - start.X)),
+                            ((int)(end.Y - start.Y)), new Color(0, 128, 0, 100)
                             );
 
                     }
@@ -73,10 +69,35 @@ namespace Task_23
                 }
                 else
                 {
+                    if (fMouse)
+                    {
+                        selected = Settings.area.GetAllUnitAt(pMouse, Raylib.GetMousePosition());
+                        Console.WriteLine("Count: " + selected.Count);
+                    }
                     fMouse = false;
                     //selected = Settings.area.GetAllUnitAt(pMouse, Raylib.GetMousePosition());
                     //Console.WriteLine("Count: " + selected.Count);
                 }
+
+                Raylib.ClearBackground(Color.Black);
+
+
+                foreach (Unit u in selected)
+                {
+                    Raylib.DrawCircle(((int)u.Coord.X), ((int)u.Coord.Y), u.UnitSize, new Color(0, 100, 0, 40));
+                    Raylib.DrawCircleLines(((int)u.Coord.X), ((int)u.Coord.Y), u.UnitSize, new Color(0, 0, 0, 40));
+                }
+
+                Texture t = new Texture(new List<RectSet> { new RectSet(new Rectangle(-20, -30, 20, 30), Color.Red) });
+                //t.Draw(new System.Numerics.Vector2(100, 100), 1);
+                //Raylib.DrawText("Hello Raylib!", 300, 100, 40, Color.White);
+                //Raylib.DrawCircle(500, 400, 100, Color.Red);
+                //Raylib.DrawRectangle(100, 200, 200, 100, Color.Blue);
+                m.Draw();
+                m1.Draw();
+                m2.Draw();
+                m.Angle++;
+
 
                 
                 Raylib.EndDrawing();

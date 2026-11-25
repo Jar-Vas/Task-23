@@ -22,12 +22,12 @@ namespace Task_23
             }
         }
 
-        public void Draw(Vector2 coord, float scale = 1.0f)
+        public void Draw(Vector2 coord, float Angle, float scale = 1.0f)
         {
             for (int i = 0; i < Tex.Count; i++)
             {
-                Rectangle temp = new Rectangle(Tex[i].Rect.Position * scale + coord, Tex[i].Rect.Size * scale);
-                if (Tex[i].Full) { Raylib.DrawRectanglePro(temp, Tex[i].Origin, Tex[i].Rotation, Tex[i].RColor); }
+                Rectangle temp = new Rectangle(coord*scale, Tex[i].Rect.Size * scale);
+                if (Tex[i].Full) { Raylib.DrawRectanglePro(temp, Tex[i].Origin, Tex[i].Rotation + Angle, Tex[i].RColor); }
             }
         }
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Dynamic;
+using System.Linq.Expressions;
 using System.Numerics;
 using System.Text;
 
@@ -32,24 +33,13 @@ namespace Task_23
             float top = Math.Min(start.Y, end.Y);
             float bottom = Math.Max(start.Y, end.Y);
 
-            int minX = Math.Clamp((int)Math.Floor(left / Settings.cellSize), 0, Arr.GetLength(0) - 1);
-            int maxX = Math.Clamp((int)Math.Floor(right / Settings.cellSize), 0, Arr.GetLength(0) - 1);
-            int minY = Math.Clamp((int)Math.Floor(top / Settings.cellSize), 0, Arr.GetLength(1) - 1);
-            int maxY = Math.Clamp((int)Math.Floor(bottom / Settings.cellSize), 0, Arr.GetLength(1) - 1);
-
-            for (int x = minX; x <= maxX; x++)
+            foreach (Obj obj in Obj.Objs)
             {
-                for (int y = minY; y <= maxY; y++)
+                if (obj is Unit unit &&
+                    unit.Coord.X >= left && unit.Coord.X <= right &&
+                    unit.Coord.Y >= top && unit.Coord.Y <= bottom)
                 {
-                    foreach (Obj obj in Arr[x, y].Objs)
-                    {
-                        if (obj is Unit unit &&
-                            unit.Coord.X >= left && unit.Coord.X <= right &&
-                            unit.Coord.Y >= top && unit.Coord.Y <= bottom)
-                        {
-                            units.Add(unit);
-                        }
-                    }
+                    units.Add(unit);
                 }
             }
 

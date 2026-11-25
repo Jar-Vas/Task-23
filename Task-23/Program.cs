@@ -22,11 +22,21 @@ namespace Task_23
             Marine m1 = new Marine(new System.Numerics.Vector2(100, 150));
             Marine m2 = new Marine(new System.Numerics.Vector2(100, 200));
 
+            for (int i = 0; i < 10; i++)
+            {
+                for (int j = 0; j < 10; j++)
+                {
+                    m2 = new Marine(new System.Numerics.Vector2(200 + 1 * i, 250 + 1 * j));
+                }
+            }
+
             while (!Raylib.WindowShouldClose())
             {
                 Raylib.BeginDrawing();
-
-
+                for (int i = 0; i < Unit.Units.Count; i++)
+                {
+                    Unit.Units[i].Tick();
+                }
                 #region area
                 for (int i = 0; i < Settings.Height; i++)
                 {
@@ -79,6 +89,14 @@ namespace Task_23
                     //Console.WriteLine("Count: " + selected.Count);
                 }
 
+                if (Raylib.IsMouseButtonDown(MouseButton.Right))
+                {
+                    for (int i = 0; i < selected.Count; i++) 
+                    {
+                        selected[i].Move(Raylib.GetMousePosition());
+                    }
+                }
+
                 Raylib.ClearBackground(Color.Black);
 
 
@@ -93,9 +111,10 @@ namespace Task_23
                 //Raylib.DrawText("Hello Raylib!", 300, 100, 40, Color.White);
                 //Raylib.DrawCircle(500, 400, 100, Color.Red);
                 //Raylib.DrawRectangle(100, 200, 200, 100, Color.Blue);
-                m.Draw();
-                m1.Draw();
-                m2.Draw();
+                for (int i = 0; i < Unit.Units.Count; i++)
+                {
+                    Unit.Units[i].Draw();
+                }
                 m.Angle++;
 
 

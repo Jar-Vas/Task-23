@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Numerics;
 using System.Text;
 
@@ -25,5 +26,15 @@ namespace Task_23
                     (int)((end.Y + 3 * Settings.cellSize / 2) / Settings.cellSize))
                 );
         }
+
+        public static float Dist(Vector2 v1, Vector2 v2)
+        {
+            float dx, dy;
+            dx = v1.X - v2.X;
+            dy = v1.Y - v2.Y;
+            return MathF.Sqrt(dx * dx + dy * dy);
+        }
+
+
     }
 }

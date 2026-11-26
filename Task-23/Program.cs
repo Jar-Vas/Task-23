@@ -22,9 +22,9 @@ namespace Task_23
             Marine m1 = new Marine(new System.Numerics.Vector2(100, 150));
             Marine m2 = new Marine(new System.Numerics.Vector2(100, 200));
 
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 3; j++)
                 {
                     m2 = new Marine(new System.Numerics.Vector2(200 + 1 * i, 250 + 1 * j));
                 }

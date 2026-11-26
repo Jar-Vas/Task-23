@@ -20,7 +20,7 @@ namespace Task_23
     {
         public float Speed;
         public float Angle { get; set; }
-        public (bool, Vector2) Went { get; set; } // (IsWalk, PointToWalk) 
+        public (bool, Vector2, HelpClass.prPos) Went { get; set; } // (IsWalk, PointToWalk, (prPos, currentIndex)) 
 
         public abstract void Move(Vector2 to);
         public abstract void Tick();
@@ -37,7 +37,7 @@ namespace Task_23
             Speed = 5;
             UnitSize = 20;
             Angle = 0;
-            Went = (false, new Vector2(0, 0));
+            Went = (false, new Vector2(0, 0), new HelpClass.prPos());
             Id = Obj.ObjCount;
             Settings.area.Arr[((int)(coord.X / Settings.cellSize)), ((int)(coord.Y / Settings.cellSize))].Objs.Add(this);
             Obj.Objs.Add(this);
@@ -50,7 +50,7 @@ namespace Task_23
 
         public override void Move(Vector2 to)
         {
-            Went = (true, to);
+            Went = (true, to, new HelpClass.prPos());
         }
         public override void Tick()
         {
@@ -68,13 +68,15 @@ namespace Task_23
             if (Went.Item1)
             {
                 float d = HelpFunc.Dist(Coord, Went.Item2);
-                if (d < UnitSize)
+                
+                if (d < Math.Max(UnitSize/3, 1) || Went.Item3.Get() < Speed/2)
                 {
-                    Went = (false, new Vector2(0, 0));
+                    Went = (false, new Vector2(0, 0), new HelpClass.prPos());
                     return;
                 }
                 Vector2 Vel = Speed * (Went.Item2 - Coord) / d;
                 Coord += Settings.dt * Vel;
+                Went.Item3.Add(d);
             }
         }
     }
